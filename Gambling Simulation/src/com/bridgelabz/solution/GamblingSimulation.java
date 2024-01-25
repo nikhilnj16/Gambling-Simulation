@@ -20,20 +20,36 @@ public class GamblingSimulation {
             return false;
         }
     }
-    public static void StakePrice(int stake, int bet, int noOfGames){
+    public void Status(int totalstake){
+        if (totalstake < 100){
+            System.out.println("Lost: " + (100-totalstake));
+        }
+        else if (totalstake > 100){
+            System.out.println("Won: " + (totalstake-100));
+        }
+        else {
+            System.out.println("No profit no loss");
+        }
+    }
+    public void StakePrice(int stake, int bet, int noOfGames){
         String result;
+        int totalstake=stake;
         for (int i=0; i<noOfGames; i++) {
             if (WinOrLoss()) {
                 result = "win";
-                stake += bet;
+                totalstake += bet;
 
             } else {
                 result = "lost";
-                stake -= bet;
+                totalstake -= bet;
             }
-            if (stake <= 50 || stake >= 150){
+            if (totalstake <= 50 || totalstake >= 150){
                 System.out.println("Not able to Play furthur");
                 break;
+            }
+            if (i==20){
+                System.out.println("Status after 20 days");
+                Status(totalstake);
             }
             System.out.println("result: " + result);
             System.out.println("stakeValue : " + stake);
@@ -43,8 +59,8 @@ public class GamblingSimulation {
 
     public static void main(String[] args) {
         GamblingSimulation obj = new GamblingSimulation();
-        obj.StakePrice(100, 1, 100);
-        System.out.println(obj);
+        obj.StakePrice(100, 1, 25);
+        
 
 
     }
