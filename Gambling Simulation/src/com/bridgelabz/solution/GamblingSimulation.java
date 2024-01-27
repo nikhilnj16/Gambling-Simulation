@@ -12,30 +12,39 @@ public class GamblingSimulation {
         }
     }
     
-    public static int simulateGambling(int initialStake, int betAmount, int noOfDays){
-        String result;
-        int totalAmountWonOrLost=0;
-        for (int day=1; day<=noOfDays; day++) {
-            int currentStake = initialStake;
+    private static void simulateGambling(int initialStake, int betAmount, int noOfDays, int noOfMonths){
+        for (int month = 1; month <= noOfMonths; month++) {
+            int totalAmountWonOrLost = 0;
+            int totalDaysWon = 0;
+            int totalDaysLost = 0;
+            for (int day = 1; day <= noOfDays; day++) {
+                int currentStake = initialStake;
 
-            while (currentStake > 50 && currentStake < 150) {
+                while (currentStake > 50 && currentStake < 150) {
 
-                if (WinOrLoss()) {
-                    result = "win";
-                    currentStake += betAmount;
+                    if (WinOrLoss()) {
+                        currentStake += betAmount;
 
-                } else {
-                    result = "lost";
-                    currentStake -= betAmount;
+                    } else {
+                        currentStake -= betAmount;
+                    }
                 }
+                int amountWonOrLost = currentStake - initialStake;
+                totalAmountWonOrLost += amountWonOrLost;
+
+                if (amountWonOrLost > 0) {
+                    totalDaysWon++;
+                }
+                else{
+                    totalDaysLost++;
+                }
+                System.out.println("Month " + month + " Day " + day + ": Amount Won or Lost - $ " + amountWonOrLost);
+
             }
-            int amountWonOrLost = currentStake - initialStake;
-            totalAmountWonOrLost+=amountWonOrLost;
-
-            System.out.println("Day " + day + ": Amount Won or Lost - $ " + amountWonOrLost);
-
+            System.out.println("Month " + month + " : Total amount won or lost - $" + totalAmountWonOrLost);
+            System.out.println("Month " + month + " : Total Days Won - " + totalDaysWon);
+            System.out.println("Month " + month + " : Total Days Lost - " + totalDaysLost);
         }
-        return totalAmountWonOrLost;
     }
 
 
@@ -43,9 +52,9 @@ public class GamblingSimulation {
         int initialStake = 100;
         int betAmount = 1;
         int noOfDays = 20;
+        int noOfMonths = 12;
+        simulateGambling(initialStake, betAmount, noOfDays, noOfMonths);
 
-        int totalAmountWonOrLost = simulateGambling(initialStake, betAmount, noOfDays);
-        System.out.println("Total amount won or lost after 20 days: $" + totalAmountWonOrLost);
 
         
 
