@@ -12,7 +12,7 @@ public class GamblingSimulation {
         }
     }
     
-    private static void simulateGambling(int initialStake, int betAmount, int noOfDays, int noOfMonths){
+    private static void simulateGambling(int initialStake, int betAmount, int noOfDays, int noOfMonths, int noOfGames){
         for (int month = 1; month <= noOfMonths; month++) {
             int totalAmountWonOrLost = 0;
             int totalDaysWon = 0;
@@ -21,12 +21,13 @@ public class GamblingSimulation {
                 int currentStake = initialStake;
 
                 while (currentStake > 50 && currentStake < 150) {
-
-                    if (WinOrLoss()) {
-                        currentStake += betAmount;
-
-                    } else {
-                        currentStake -= betAmount;
+                    for ( int game = 1; game <= noOfGames; game++){
+                        if (WinOrLoss()) {
+                            currentStake += betAmount;
+                        }
+                        else {
+                            currentStake -= betAmount;
+                        }
                     }
                 }
                 int amountWonOrLost = currentStake - initialStake;
@@ -53,7 +54,8 @@ public class GamblingSimulation {
         int betAmount = 1;
         int noOfDays = 20;
         int noOfMonths = 12;
-        simulateGambling(initialStake, betAmount, noOfDays, noOfMonths);
+        int noOfGames = 100;
+        simulateGambling(initialStake, betAmount, noOfDays, noOfMonths, noOfGames);
 
 
         
