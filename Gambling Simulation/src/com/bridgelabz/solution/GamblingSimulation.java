@@ -17,6 +17,10 @@ public class GamblingSimulation {
             int totalAmountWonOrLost = 0;
             int totalDaysWon = 0;
             int totalDaysLost = 0;
+            int luckiestDay = 0;
+            int unluckiestDay = 0;
+            int maxWin = 0;
+            int maxLoss = 0;
             for (int day = 1; day <= noOfDays; day++) {
                 int currentStake = initialStake;
 
@@ -39,13 +43,26 @@ public class GamblingSimulation {
                 else{
                     totalDaysLost++;
                 }
+                if (amountWonOrLost > maxWin){
+                    maxWin = amountWonOrLost;
+                    luckiestDay = day;
+
+                }
+                if (amountWonOrLost < maxLoss){
+                    maxLoss = amountWonOrLost;
+                    unluckiestDay = day;
+
+                }
                 System.out.println("Month " + month + " Day " + day + ": Amount Won or Lost - $ " + amountWonOrLost);
 
             }
             System.out.println("Month " + month + " : Total amount won or lost - $" + totalAmountWonOrLost);
             System.out.println("Month " + month + " : Total Days Won - " + totalDaysWon);
             System.out.println("Month " + month + " : Total Days Lost - " + totalDaysLost);
+            System.out.println("Month " + month + " : Luckiest Day - " + luckiestDay + " ( Amount: $" + maxWin + " )");
+            System.out.println("Month " + month + " : Unluckiest Day - " + unluckiestDay + " ( Amount: $" + maxLoss + " )");
         }
+
     }
 
 
