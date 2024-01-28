@@ -61,6 +61,9 @@ public class GamblingSimulation {
             System.out.println("Month " + month + " : Total Days Lost - " + totalDaysLost);
             System.out.println("Month " + month + " : Luckiest Day - " + luckiestDay + " ( Amount: $" + maxWin + " )");
             System.out.println("Month " + month + " : Unluckiest Day - " + unluckiestDay + " ( Amount: $" + maxLoss + " )");
+            if (totalAmountWonOrLost < 0){
+                break;
+            }
         }
 
     }
